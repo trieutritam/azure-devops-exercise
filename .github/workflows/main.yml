@@ -8,12 +8,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run make command
-      run: make hello
+    - name: Setup Python
+      uses: actions/setup-python@v5.1.0
+      with:
+        python-version: 3.5
+        
+    - name: Install Dependencies
+      run: |
+        make install
+        
+    - name: Lint with Pylint
+      run: |
+        make lint
+        
+    - name: Test with pytest
+      run: |
+        make test
 
     
       
